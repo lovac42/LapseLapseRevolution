@@ -13,8 +13,9 @@ from aqt.reviewer import Reviewer
 from aqt import mw
 
 from anki import version
-ANKI21 = version.startswith("2.1.")
-PYCALLBAK="pycmd" if ANKI21 else "py.link"
+# ANKI20 = version.startswith("2.0")
+CCBC = version.endswith("ccbc")
+PYCALLBAK="py.link" if CCBC else "pycmd"
 
 
 # TODO: map buttons to dance mat using autohotkey
