@@ -12,4 +12,4 @@ REM %ZIP% %REPO%_20.zip *.py %REPO%/*
 cd %REPO%
 %ZIP% ../%REPO%_21.ankiaddon *
 
-%ZIP% ../%REPO%_21.adze *
+%ZIP% ../%REPO%_CCBC.adze *
