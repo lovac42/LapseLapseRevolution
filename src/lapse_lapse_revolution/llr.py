@@ -4,18 +4,18 @@
 # Support: https://github.com/lovac42/LapseLapseRevolution
 
 
+import sys
 from anki.lang import _
 from anki.hooks import wrap, addHook
 from anki.utils import fmtTimeSpan, json
 from anki.sched import Scheduler
-from anki.schedv2 import Scheduler as SchedulerV2
 from aqt.reviewer import Reviewer
 from aqt import mw
 
-from anki import version
-# ANKI20 = version.startswith("2.0")
-CCBC = version.endswith("ccbc")
-PYCALLBAK="py.link" if CCBC else "pycmd"
+# Fun Facts:
+#  Anki 2.0.8 = v1.99
+PYTHON2=sys.version_info[0]<3
+PYCALLBAK="py.link" if PYTHON2 else "pycmd" #Anki2.0 or below
 
 
 # TODO: map buttons to dance mat using autohotkey
@@ -123,5 +123,7 @@ class LapseButtons:
 llr=LapseLapseRevolution()
 Reviewer._answerCard=wrap(Reviewer._answerCard,llr.onAnswerCard,"around")
 Scheduler._nextLapseIvl=wrap(Scheduler._nextLapseIvl,llr.onLapseIvl,"around")
-SchedulerV2._lapseIvl=wrap(SchedulerV2._lapseIvl,llr.onLapseIvl,"around")
+if not PYTHON2:
+    from anki.schedv2 import Scheduler as SchedulerV2
+    SchedulerV2._lapseIvl=wrap(SchedulerV2._lapseIvl,llr.onLapseIvl,"around")
 
